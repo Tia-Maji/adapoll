@@ -1,13 +1,22 @@
 <div class="content component polls">
   <div class="container">
+    <div class="flex flex-row justify-between border-b pb-4 mb-4">
+      <h1 class="text-xl xl:text-3xl 2xl:text-4xl text-gray-700">
+        My Polls
+      </h1>
+      <button type="button"
+              class="inline-flex items-center justify-center rounded-sm border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+        Create Poll
+      </button>
+    </div>
     <div class="flex flex-col gap-4">
-      <div class="font-medium text-lg sm:text-xl lg:text-3xl xl:text-4xl p-0">
-        <a class="text-gray-700" [routerLink]="['/polls', 54]">
+      <div class="font-medium text-lg sm:text-xl lg:text-3xl p-0">
+        <a class="text-gray-700 font-thin" [routerLink]="['/polls', 54]">
           Poll 54
         </a>
       </div>
-      <div class="font-medium text-lg sm:text-xl lg:text-3xl xl:text-4xl p-0">
-        <a class="text-gray-700" [routerLink]="['/polls', 17]">
+      <div class="font-medium text-lg sm:text-xl lg:text-3xl p-0">
+        <a class="text-gray-700 font-thin" [routerLink]="['/polls', 17]">
           Token Batch 17
         </a>
       </div>
