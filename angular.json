@@ -110,5 +110,7 @@
       }
     }
   },
-  "defaultProject": "adapoll"
+  "cli": {
+    "analytics": "7f57c096-9bdb-4e74-86a1-d0e83cdd3b31"
+  }
 }
