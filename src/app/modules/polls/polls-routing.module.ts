@@ -7,6 +7,14 @@ const routes: Routes = [
     path: '',
     component: PollsComponent,
     pathMatch: 'full',
+    // @todo could not get nested lazy routes to load
+    // children: [
+    //   {
+    //     path: '',
+    //     pathMatch: "full",
+    //     loadChildren: () => import('@modules/polls/poll/poll.module').then(m => m.PollModule)
+    //   },
+    // ]
   },
 ];
 

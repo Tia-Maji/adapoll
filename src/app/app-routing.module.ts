@@ -16,7 +16,13 @@ const routes: Routes = [
     loadChildren: () => import('@modules/polls/polls.module').then(m => m.PollsModule)
   },
   {
+    path: 'polls/create',
+    pathMatch: "full",
+    loadChildren: () => import('@modules/polls/poll/create-poll.module').then(m => m.CreatePollModule)
+  },
+  {
     path: 'polls/:poll',
+    pathMatch: "full",
     loadChildren: () => import('@modules/polls/poll/poll.module').then(m => m.PollModule)
   },
   {

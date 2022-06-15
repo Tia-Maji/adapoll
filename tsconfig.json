@@ -21,6 +21,7 @@
     "paths": {
       "@modules/*": ["src/app/modules/*"],
       "@services/*": ["src/app/services/*"],
+      "@store/*": ["src/app/store/*"],
       "*": [
         "node_modules/*"
       ]
