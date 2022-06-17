@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import { MatDatepicker } from '@angular/material/datepicker';
 import {Moment} from "moment";
 import {Store} from "@ngxs/store";
-import {Poll} from "@modules/polls/types/poll.type";
 import {PollActions} from "@store/polls/poll.actions";
 import CreatePoll = PollActions.CreatePoll;
+import {Poll} from "@modules/polls/types/poll.type";
 
 @Component({
   selector: 'ap-create-poll',
@@ -32,7 +31,6 @@ export class CreatePollComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createPoll();
   }
 
   createPoll()

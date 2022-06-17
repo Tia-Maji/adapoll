@@ -12,4 +12,14 @@ export class PollComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  upVote()
+  {
+
+  }
+
+  downVote()
+  {
+
+  }
+
 }
