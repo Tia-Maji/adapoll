@@ -27,6 +27,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "highlightjs-line-numbers.js": "^2.8.0",
+    "lucid-cardano": "^0.3.5",
     "moment": "^2.29.3",
     "ngx-highlightjs": "7.0.0",
     "postcss": "^8.4.14",
