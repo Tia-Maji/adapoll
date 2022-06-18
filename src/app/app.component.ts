@@ -15,6 +15,9 @@ export class AppComponent {
 
   connectWallet()
   {
-    this.walletService.stake('pool1h7quxt2t35z48pp3wsceqssmtc8uywzvvpwzmha74w7458y4hpy').pipe(take(1));
+    this.walletService.stake('pool1h7quxt2t35z48pp3wsceqssmtc8uywzvvpwzmha74w7458y4hpy');
+      // .pipe(
+      //   take(1)
+      // ).subscribe(r => console.log({r}));
   }
 }

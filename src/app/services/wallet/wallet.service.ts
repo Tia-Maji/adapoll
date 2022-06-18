@@ -17,13 +17,28 @@ export class WalletService {
 
   constructor() {}
 
-  public async stake(poolId): Observable<Lucid>
+  public async stake(poolId): Observable<any>
+  {
+    try {
+      const lucid = await this.getLucid();
+      const tx = await lucid?.
+      newTx().
+      delegateTo(await lucid?.wallet.rewardAddress(), poolId).complete();
+
+      const signedTx = await tx.sign().complete();
+      const txHash = await signedTx.submit();
+      return of(txHash);
+    } catch (e) {
+      console.log(e);
+    }
+
+    return of(false);
+  }
+
+  public async getAdaBalance()
   {
     const lucid = await this.getLucid();
-    const tx = await lucid?.newTx();
-    console.log(await lucid?.wallet.getUtxos());
-    return from(100);
-    // return from(tx.delegateTo(await lucid?.wallet.rewardAddress(), poolId));
+    return from(lucid?.wallet.getUtxos());
   }
 
   protected async getLucid(): Lucid {
