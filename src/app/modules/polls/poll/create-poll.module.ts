@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import {WalletService} from "@services/wallet/wallet.service";
 import {CreatePollComponent} from "@modules/polls/poll/create-poll/create-poll.component";
 import {RouterModule} from "@angular/router";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDatepickerModule} from "@angular/material/datepicker";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgxMatDatetimePickerModule, NgxMatTimepickerModule} from "@angular-material-components/datetime-picker";
-import {MatInputModule} from "@angular/material/input";
 import {HighlightModule} from "ngx-highlightjs";
 import {NgxsModule} from "@ngxs/store";
 import {PollState} from "@store/polls/poll.state";
+import {CalendarModule} from "primeng/calendar";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {InputTextModule} from "primeng/inputtext";
+import {NgxsFormPluginModule} from "@ngxs/form-plugin";
 
 @NgModule({
   declarations: [
@@ -23,15 +23,10 @@ import {PollState} from "@store/polls/poll.state";
 
     HighlightModule,
 
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatInputModule,
-
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
     NgxsModule.forFeature([
       PollState
     ]),
+    NgxsFormPluginModule,
 
     ReactiveFormsModule,
     RouterModule.forChild([
@@ -41,6 +36,9 @@ import {PollState} from "@store/polls/poll.state";
         component: CreatePollComponent
       },
     ]),
+    CalendarModule,
+    InputTextareaModule,
+    InputTextModule,
   ],
   exports: [
     CreatePollComponent

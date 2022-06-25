@@ -1,51 +1,60 @@
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$adapoll-primary: mat.define-palette(mat.$indigo-palette);
-$adapoll-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$adapoll-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$adapoll-theme: mat.define-light-theme((
-  color: (
-    primary: $adapoll-primary,
-    accent: $adapoll-accent,
-    warn: $adapoll-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($adapoll-theme);
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.container{
-  @apply mx-auto p-8 lg:py-8;
+@layer base {
+  h1 {
+    @apply  text-2xl font-bold md:text-4xl;
+  }
 
-  a{
-    :hover{
-      @apply text-cyan-600;
+  h2 {
+    @apply  text-xl font-bold md:text-3xl;
+  }
+
+  h3 {
+    @apply  text-lg font-bold md:text-2xl;
+  }
+
+  h4 {
+    @apply text-base font-bold md:text-lg;
+  }
+
+  body {
+    @apply  text-sm md:text-base;
+  }
+
+  .layout {
+    /* 750px */
+    /* max-width: 43.75rem; */
+
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
+  }
+
+  /* Class to adjust with sticky footer */
+  .min-h-main {
+    @apply min-h-[calc(100vh-56px)];
+  }
+
+  [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    //border-color: #6b7280;
+    @apply border-gray-300;
+    border-radius: 6px;
+  }
+
+  .container{
+    @apply mx-auto p-8 lg:py-8;
+
+    a{
+      :hover{
+        @apply text-cyan-600;
+      }
     }
   }
-}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+}

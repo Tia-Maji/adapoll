@@ -11,4 +11,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],
+  corePlugins: {
+    preflight: true
+  }
 }

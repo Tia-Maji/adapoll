@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WalletService} from "@services/wallet/wallet.service";
+import { PrimeNGConfig } from 'primeng/api';
 import {first, take} from "rxjs";
 
 @Component({
@@ -7,10 +8,13 @@ import {first, take} from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'adapoll';
 
-  constructor(protected walletService: WalletService) {
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    protected walletService: WalletService
+  ) {
   }
 
   connectWallet()
@@ -19,5 +23,9 @@ export class AppComponent {
       // .pipe(
       //   take(1)
       // ).subscribe(r => console.log({r}));
+  }
+
+  ngOnInit(): void {
+    this.primengConfig.ripple = true;
   }
 }

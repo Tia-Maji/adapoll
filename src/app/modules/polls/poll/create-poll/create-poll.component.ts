@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import { MatDatepicker } from '@angular/material/datepicker';
 import {Moment} from "moment";
 import {Store} from "@ngxs/store";
 import {Poll} from "@modules/polls/types/poll.type";
 import {PollActions} from "@store/polls/poll.actions";
 import CreatePoll = PollActions.CreatePoll;
+import {take} from "rxjs";
+import {ResetForm, UpdateFormDirty} from "@ngxs/form-plugin";
 
 @Component({
   selector: 'ap-create-poll',
@@ -29,15 +30,27 @@ export class CreatePollComponent implements OnInit {
 
   constructor(
     private store: Store
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.createPoll();
   }
 
-  createPoll()
-  {
-    this.store.dispatch(new CreatePoll(this.createPollForm.value as Poll));
+  createPoll() {
+    const metaDAta = {
+      10213: {
+        description: this.createPollForm.controls.description.value
+      }
+    }
+    this.store
+      .dispatch(new CreatePoll(this.createPollForm.value as Poll))
+      .pipe(take(1))
+      .subscribe(() => this.store.dispatch(
+        new ResetForm({
+          path: 'poll.createPollForm'
+        })
+      ));
   }
 
 }

@@ -55,3 +55,10 @@ import 'zone.js';  // Included with Angular CLI.
 (window as any).global = window;
 // @ts-ignore
 window.Buffer = window.Buffer || require('buffer').Buffer;
+
+declare global {
+  type ScriptRefJSON = any;
+  type ScriptJSON = any;
+  type DataJSON = any;
+  type WalletApi = any;
+}

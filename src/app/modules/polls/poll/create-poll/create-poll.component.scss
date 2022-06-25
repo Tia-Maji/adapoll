@@ -1,0 +1,18 @@
+::ng-deep {
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    @apply bg-indigo-500;
+    //background-color: @apply;
+  }
+
+  input[type=text] {
+    //border-radius: 6px;
+  }
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    @apply text-white;
+  }
+
+}

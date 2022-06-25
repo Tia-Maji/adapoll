@@ -1,4 +1,4 @@
-<div class="content component poll py-10 bg-white">
+<div class="content component poll bg-white border-t">
   <div class="container">
     <div class="flex flex-row justify-between">
       <h1 class="text-2xl xl:text-3xl mb-2 font-semibold text-gray-900">
@@ -7,7 +7,6 @@
     </div>
 
     <div class="bg-gray-50 shadow-md inset-1 p-8">
-
         <div>
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -21,79 +20,94 @@
               </div>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
-              <form [formGroup]="createPollForm" (submit)="createPoll()">
-                <div class="shadow sm:rounded-md sm:overflow-hidden">
+              <form [formGroup]="createPollForm" ngxsForm="poll.createPollForm" (submit)="createPoll()">
+                <div class="shadow sm:rounded-md">
                   <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div class="grid grid-cols-3 gap-6">
-                      <div class="col-span-3 sm:col-span-2">
-                        <label for="poll-name" class="block text-sm font-medium text-gray-700"> Name </label>
+                      <div class="col-span-3">
+                        <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                         <div class="mt-1 flex rounded-md shadow-sm">
-                          <input type="text" name="poll-website" id="poll-name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="My Poll Name">
+                          <input pInputText
+                                 type="text"
+                                 name="poll-website"
+                                 id="name"
+                                 placeholder="My Poll Name"
+                                 formControlName="name"
+                                 class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300">
                         </div>
                       </div>
                     </div>
                     <div class="grid grid-cols-3 gap-6">
-                      <div class="col-span-3 sm:col-span-2">
+                      <div class="col-span-3">
                         <label for="poll-website" class="block text-sm font-medium text-gray-700"> Website </label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                           <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> https:// </span>
-                          <input type="text" name="poll-website" id="poll-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com">
+                          <input
+                            type="text"
+                            name="poll-website"
+                            id="poll-website"
+                            formControlName="website"
+                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                            placeholder="www.example.com">
                         </div>
                       </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-6 mt-4">
-                      <div class="col-span-3">
-                        <mat-form-field appearance="fill">
-                          <mat-label>Start & End Date</mat-label>
-                          <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate formControlName="startDate" placeholder="Start date">
-                            <input matEndDate formControlName="endDate" placeholder="End date">
-                          </mat-date-range-input>
-                          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-date-range-picker #picker></mat-date-range-picker>
-
-                          <mat-error *ngIf="createPollForm.controls.startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                          <mat-error *ngIf="createPollForm.controls.endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-6 max-w-sm">
-                      <div class="p-2 bg-gray-100">
-                        <label for="poll-website" class="block text-sm font-medium text-gray-700"> Start Time (24hrs UTC) </label>
-                        <div class="mt-1 flex rounded-md shadow-xs">
-                          <ngx-mat-timepicker formControlName="startTime"></ngx-mat-timepicker>
+                    <!-- Dates -->
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                      <div class="">
+                        <label for="startDate" class="block text-sm font-medium text-gray-700"> Start Date </label>
+                        <div class="p-field p-col-12 p-md-4 rounded-md">
+                          <p-calendar
+                            styleClass="w-full"
+                            formControlName="startDate"
+                            [showIcon]="true"
+                            inputId="startDate"
+                            class="rounded-md"></p-calendar>
                         </div>
                       </div>
-                      <div class="p-2 bg-gray-100">
-                        <label for="poll-website" class="block text-sm font-medium text-gray-700"> End Time (24hrs UTC) </label>
-                        <div class="mt-1 flex rounded-md shadow-xs">
-                          <ngx-mat-timepicker formControlName="endTime"></ngx-mat-timepicker>
+                      <div class="">
+                        <label for="endDate" class="block text-sm font-medium text-gray-700"> End Date </label>
+                        <div class="p-field p-col-12 p-md-4 rounded-md">
+                          <p-calendar
+                            styleClass="w-full"
+                            formControlName="endDate"
+                            [showIcon]="true"
+                            inputId="endDate"
+                            class="rounded-md"></p-calendar>
                         </div>
                       </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-6">
-                      <div class="col-span-3">
-<!--                        <mat-form-field>-->
-<!--                        @todo couldn't get this to work so we can combine date and time pickers -->
-<!--                          <input [ngxMatDatetimePicker]="pickerFrom" #start placeholder="Poll Start Date & Time" formControlName="start">-->
-
-<!--                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>-->
-
-<!--                          <ngx-mat-datetime-picker #pickerFrom [enableMeridian]="true"></ngx-mat-datetime-picker>-->
-<!--                        </mat-form-field>-->
-
-<!--                        <mat-form-field>-->
-<!--                          <input [ngxMatDatetimePicker]="pickerTo" placeholder="Poll End Date & Time" formControlName="end"-->
-<!--                                 [min]="start.value">-->
-
-<!--                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>-->
-
-<!--                          <ngx-mat-datetime-picker #pickerTo [enableMeridian]="true"></ngx-mat-datetime-picker>-->
-<!--                        </mat-form-field>-->
+                    <!-- Times -->
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                      <div class="">
+                        <label for="startTime" class="block text-sm font-medium text-gray-700"> Start Time </label>
+                        <div class="p-field p-col-12 p-md-4 rounded-md">
+                          <p-calendar
+                            styleClass="w-full"
+                            formControlName="startTime"
+                            [showIcon]="true"
+                            inputId="startTime"
+                            [showTime]="true"
+                            [timeOnly]="true"
+                            icon="pi pi-clock"
+                            class="rounded-md"></p-calendar>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="endTime" class="block text-sm font-medium text-gray-700"> End Time </label>
+                        <div class="p-field p-col-12 p-md-4 rounded-md">
+                          <p-calendar
+                            styleClass="w-full"
+                            formControlName="endTime"
+                            [showIcon]="true"
+                            inputId="endTime"
+                            [showTime]="true"
+                            icon="pi pi-clock"
+                            [timeOnly]="true"
+                            class="rounded-md"></p-calendar>
+                        </div>
                       </div>
                     </div>
 
@@ -102,7 +116,11 @@
                         Brief Description
                       </label>
                       <div class="mt-1">
-                        <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Poll Description"></textarea>
+                        <textarea
+                          formControlName="description"
+                          id="about" name="about" rows="7" pInputTextarea
+                          class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          placeholder="Poll Description"></textarea>
                       </div>
                       <p class="mt-2 text-sm text-gray-500">
                         Brief description or instructions to display to users.
