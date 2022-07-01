@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Moment} from "moment";
-import {Store} from "@ngxs/store";
+import {Select, Store} from "@ngxs/store";
 import {Poll} from "@modules/polls/types/poll.type";
 import {PollActions} from "@store/polls/poll.actions";
 import CreatePoll = PollActions.CreatePoll;
-import {take} from "rxjs";
-import {ResetForm, UpdateFormDirty} from "@ngxs/form-plugin";
+import {Observable, take} from "rxjs";
+import {ResetForm, SetFormDisabled, SetFormEnabled, UpdateFormDirty} from "@ngxs/form-plugin";
+import {PollState} from "@store/polls/poll.state";
 
 @Component({
   selector: 'ap-create-poll',
@@ -16,7 +17,8 @@ import {ResetForm, UpdateFormDirty} from "@ngxs/form-plugin";
 export class CreatePollComponent implements OnInit {
   // @ViewChild(MatDatepicker) datepicker: MatDatepicker<Moment>;
 
-  public metaData: string | null = null;
+  @Select(PollState.poll) poll$: Observable<Poll>;
+  @Select(PollState.metaData) metaDAta$: Observable<string>;
 
   public createPollForm = new FormGroup({
     description: new FormControl<string | null>(null),
@@ -34,23 +36,17 @@ export class CreatePollComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createPoll();
+    // this.createPoll();
+    this.store.dispatch(new SetFormEnabled('poll.createPollForm'));
   }
 
   createPoll() {
-    const metaDAta = {
-      10213: {
-        description: this.createPollForm.controls.description.value
-      }
-    }
     this.store
-      .dispatch(new CreatePoll(this.createPollForm.value as Poll))
-      .pipe(take(1))
-      .subscribe(() => this.store.dispatch(
-        new ResetForm({
-          path: 'poll.createPollForm'
-        })
-      ));
+      .dispatch(new CreatePoll())
+      // .pipe(take(1))
+      // .subscribe(() => this.store.dispatch(
+      //   new SetFormDisabled('poll.createPollForm')
+      // ));
   }
 
 }

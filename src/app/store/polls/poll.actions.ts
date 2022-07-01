@@ -3,8 +3,7 @@ export namespace PollActions {
   export class CreatePoll {
     static readonly type = '[Polls] Create Poll';
 
-    constructor(public poll: Poll) {
-    }
+    constructor() {}
   }
 
   export class UpdatePoll {

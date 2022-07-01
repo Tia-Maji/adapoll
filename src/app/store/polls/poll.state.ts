@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Action, State, StateContext, StateToken} from '@ngxs/store';
+import {Action, Selector, State, StateContext, StateToken} from '@ngxs/store';
 import {Poll} from "@modules/polls/types/poll.type";
 import {PollActions} from "@store/polls/poll.actions";
 import CreatePoll = PollActions.CreatePoll;
@@ -42,13 +42,26 @@ export interface PollStateModel {
 
 @Injectable()
 export class PollState {
+  @Selector()
+  static poll(state: PollStateModel) {
+    return state.poll;
+  }
+
+  @Selector()
+  static metaData(state: PollStateModel) {
+    if (!state.poll) {
+      return;
+    }
+    return state.poll;
+  }
+
   @Action(CreatePoll)
   createPoll(ctx: StateContext<PollStateModel>, action: CreatePoll)
   {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      poll: action.poll
-    })
+      poll: state.createPollForm?.model as Poll
+    });
   }
 }
